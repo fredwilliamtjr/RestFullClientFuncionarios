@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
+
+    <section layout:fragment="conteudo">
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <h1>
+                    Cadastro de Pessoas
+                    <small></small>
+                </h1>
+                <ol class="breadcrumb">
+                    <li><a th:href="@{/inicio}"><i class="fa fa-dashboard"></i> Inicio</a></li>
+                    <li class="active">Cadastro de Pessoas</li>
+                </ol>
+            </section>
+
+            <!-- Main content -->
+            <section class="content">
+
+                <form class="form-horizontal" method="POST" th:action="@{/pessoa}" th:object="${pessoa}">
+                    <div layout:include="MensagemGeral"></div>
+                    <div layout:include="MensagemErro"></div>
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <div class="clearfix">
+                                <h1 class="panel-title aw-titulo-panel">Nova Pessoa</h1>
+                                <a class="btn btn-link aw-link-panel" th:href="@{/inicio}">Voltar para Lista</a>
+                            </div>
+                        </div>
+
+                        <div class="panel-body">
+                            <input type="hidden" th:field="*{id}"/>
+
+                            <div class="form-group" th:classappend="${#fields.hasErrors('nome')} ? has-error">
+                                <label for="nome" class="col-sm-2 control-label">Nome</label>
+                                <div class="col-sm-4"> 
+
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-user"></i>
+                                        </div>
+                                        <input type="text" class="form-control" id="nome" th:field="*{nome}"/>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="form-group" th:classappend="${#fields.hasErrors('dataNascimento')} ? has-error">
+                                <label for="dataNascimento" class="col-sm-2 control-label">Data de nascimento</label>
+                                <div class="col-sm-2">  
+
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-calendar"></i>
+                                        </div>
+                                        <input  type="text" class="form-control" id="dataNascimento" th:field="*{dataNascimento}"
+                                                data-provide="datepicker" data-date-format="dd/mm/yyyy" data-date-language="pt-BR"
+                                                data-date-autoclose="true" data-date-today-highlight="true" data-date-orientation="top"/>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="form-group" th:classappend="${#fields.hasErrors('telefone')} ? has-error">
+
+                                
+
+
+                                <label for="telefone" class="col-sm-2 control-label">Telefone</label>
+                                <div class="col-sm-2">   
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-phone"></i>
+                                        </div>
+                                        <input type="text" class="form-control maskCelular9digito" id="telefone" th:field="*{telefone}"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="status" class="col-sm-2 control-label">Status</label>
+                                <div class="col-sm-2">
+                                    <select class="form-control" name="status" th:field="*{status}">
+                                        <option style="background: #5cb85c; color: #fff;" th:value="${{true}}">Ativo</option>
+                                        <option style="background: red; color: #fff;" th:value="${{false}}">Inativo</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <button type="submit" class="btn btn-primary">Salvar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+            </section>
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+    </section>
+
+
+</html>
