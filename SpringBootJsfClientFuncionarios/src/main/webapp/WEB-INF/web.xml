@@ -28,7 +28,7 @@
     <!--Linha 107 do SpringBootFacesApplication.class-->
     <context-param>  
         <param-name>primefaces.THEME</param-name>  
-        <param-value>delta</param-value>  
+        <param-value>bootstrap</param-value>  
     </context-param>
     
     <!--Linha 108 do SpringBootFacesApplication.class-->

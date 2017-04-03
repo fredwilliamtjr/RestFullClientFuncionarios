@@ -4,12 +4,14 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
+import org.springframework.stereotype.Component;
 
 
 /**
  *
  * @author Junior
  */
+@Component
 public class Falta implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -19,6 +21,7 @@ public class Falta implements Serializable {
     private Date data;
     private String motivo;
     private Funcionario funcionario;
+    private String Uri;
 
     public Long getId() {
         return id;
@@ -52,6 +55,14 @@ public class Falta implements Serializable {
         this.funcionario = funcionario;
     }
 
+    public String getUri() {
+        return Uri;
+    }
+
+    public void setUri(String Uri) {
+        this.Uri = Uri;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 5;

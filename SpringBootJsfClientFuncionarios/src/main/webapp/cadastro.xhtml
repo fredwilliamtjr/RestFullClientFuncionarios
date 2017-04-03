@@ -1,0 +1,178 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/templates/Layout.xhtml">
+
+    <f:metadata>
+        <f:viewAction action="#{funcionarioClientBean.inicioCadastro()}"/>
+    </f:metadata>
+
+    <ui:define name="content">
+
+        <h1 class="aw-page-title">Cadastro de Funcionários</h1>
+
+        <h:form id="frm">
+            <p:messages id="msgs" autoUpdate="true" closable="true"  />
+            <p:panel header="Cadastro de Funcionário" >
+                <div class="ui-grid-responsive">
+                    <div class="ui-grid-row">
+                        <div class="ui-g-12 ui-md-6 ui-lg-5" >
+                            <p:inputText id="id" value="#{funcionarioClientBean.funcionarioEdicao.id}" rendered="false"></p:inputText>
+                            <p:inputText styleClass="campos" required="true" requiredMessage="Nome é obrigatorio" id="nome" value="#{funcionarioClientBean.funcionarioEdicao.nome}" placeholder="Nome" />
+                        </div>
+                        <div class="ui-g-12 ui-md-6 ui-lg-3" >
+                            <p:inputText styleClass="campos" required="true" requiredMessage="Setor é obrigatorio" id="setor" value="#{funcionarioClientBean.funcionarioEdicao.setor}" placeholder="Setor" />
+                        </div>
+                        <div class="ui-g-12 ui-md-6 ui-lg-2" >
+                            <p:calendar styleClass="calendario" style="width: 97%" showButtonPanel="true" locale="pt" navigator="true" required="true" requiredMessage="Data nascimento é obrigatorio" id="datanascimento" value="#{funcionarioClientBean.funcionarioEdicao.dataNascimento}" placeholder="Data Nascimento" pattern="dd/MM/yyyy" />
+                        </div>
+                        <div class="ui-g-12 ui-md-6 ui-lg-2" >
+                            <p:calendar styleClass="calendario" showButtonPanel="true" locale="pt" navigator="true" required="true" requiredMessage="Data contratação é obrigatorio" id="datacontratacao" value="#{funcionarioClientBean.funcionarioEdicao.dataContratacao}" placeholder="Data Contratacao" pattern="dd/MM/yyyy" />
+                        </div>
+                        <div class="ui-g-12 ui-md-12 ui-lg-6" >
+                            <p:commandButton styleClass="botao botaoverde" action="#{funcionarioClientBean.novo()}" value="Novo" process="@this" update="nome setor datanascimento datacontratacao :frm2:tabela :frm2:novafalta" onsuccess="setTimeout ( '$(\'#form\\\\:msgs\').hide()', 4000);" oncomplete="$(function(){PrimeFaces.focus('form:nome');});"  ></p:commandButton>
+                        </div>
+                        <div class="ui-g-12 ui-md-12 ui-lg-6" >
+                            <p:commandButton  styleClass="botao botaoamarelo" action="#{funcionarioClientBean.salvar()}" value="Salvar" process="@this nome setor datanascimento datacontratacao" update="nome setor datanascimento datacontratacao" onsuccess="setTimeout ( '$(\'#form\\\\:msgs\').hide()', 4000);" oncomplete="$(function(){PrimeFaces.focus('form:nome');});"  ></p:commandButton>
+                        </div>
+                    </div>
+                </div>
+            </p:panel>
+        </h:form>
+
+
+        <h:form id="frm2">
+            <p:panel header="Lista Faltas">
+                <p:commandButton id="novafalta" styleClass="botao botaoverde" value="Nova Falta" oncomplete="PF('DialogoFaltas').show()"
+                                 process="@this" update="id datafalta motivofalta" binding="#{funcionarioClientBean.botaoInserirFalta}" action="#{funcionarioClientBean.novaFalta()}"/>
+                <br/>
+                <br/>
+                <p:dataTable  id="tabela" emptyMessage="Nenhuma Falta encontrada" var="fa" value="#{funcionarioClientBean.listaFaltas}" >
+                    <p:column headerText="Data" >
+                        <p:outputLabel value="#{fa.data}">
+                            <f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
+                        </p:outputLabel>
+                    </p:column>
+                    <p:column headerText="Motivo"  > 
+                        <p:outputLabel value="#{fa.motivo}"></p:outputLabel>
+                    </p:column>
+                    <p:column headerText="Ações" width="10%">
+                        <p:commandButton icon="fa fa-trash" styleClass="botao botaovermelho" action="#{funcionarioClientBean.deletarFalta(fa)}" process="@this" update="@this tabela" ></p:commandButton>
+                    </p:column>
+                </p:dataTable>
+            </p:panel>
+
+
+            <p:dialog header="Cadastro de Faltas" widgetVar="DialogoFaltas" responsive="true" resizable="false" modal="true" showEffect="explode" style="position: absolute">
+                
+                <p:panelGrid columns="3" styleClass="ui-panelgrid-blank" layout="grid" columnClasses="ui-grid-col-3,ui-grid-col-6,ui-grid-col-3" >
+                    
+                    <p:inputText id="id" value="#{funcionarioClientBean.faltaEdicao.id}" rendered="false"></p:inputText>
+                    
+                    <p:calendar styleClass="calendario" showButtonPanel="true" locale="pt" navigator="true" required="true" requiredMessage="Data da falta é obrigatório" 
+                                id="datafalta" value="#{funcionarioClientBean.faltaEdicao.data}" placeholder="Data Falta" pattern="dd/MM/yyyy" />
+                    
+                    <p:inputText styleClass="campos" required="true" requiredMessage="Motivo é obrigatorio" id="motivofalta" value="#{funcionarioClientBean.faltaEdicao.motivo}" 
+                                 placeholder="Motivo" />
+                    
+                    <p:commandButton  styleClass="botao botaoamarelo" action="#{funcionarioClientBean.inserirFalta()}" value="Inserir" 
+                                      process="@this datafalta motivofalta" update="datafalta motivofalta tabela" 
+                                      onsuccess="setTimeout ( '$(\'#form\\\\:msgs\').hide()', 4000);" oncomplete="PF('DialogoFaltas').hide()" ></p:commandButton>
+                </p:panelGrid>
+            </p:dialog>
+        </h:form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </ui:define>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h3>Sample Layout</h3>
+    <div class="ui-g">
+        <div class="ui-g-12 ui-md-2">M</div>
+        <div class="ui-g-12 ui-md-10 ui-g-nopad">
+            <div class="ui-g-12">
+                Bar
+            </div>
+            <div class="ui-g-12 ui-g-nopad">
+                <div class="ui-g">
+                    <div class="ui-g-12 ui-md-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed imperdiet, orci nec dictum convallis, ligula mauris vestibulum turpis, nec varius tortor quam at diam. Nullam a viverra nibh. In tincidunt tempor lectus quis vulputate. Pellentesque nec dui aliquam, lobortis est in, lobortis ante</div>
+                    <div class="ui-g-12 ui-md-4">Maecenas vel nisi aliquet, vulputate tortor id, laoreet massa. Maecenas mattis tristique bibendum. Suspendisse vel mi dictum, vestibulum lacus quis, pulvinar quam. Proin vulputate, nibh at finibus varius, leo eros lacinia elit, nec blandit odio tellus a justo. Donec nec ex auctor, tristique nulla nec, rutrum sapien.</div>
+                    <div class="ui-g-12 ui-md-4">Proin efficitur in leo eget ornare. Nam vestibulum neque sed velit sagittis sodales. Sed scelerisque hendrerit magna a hendrerit. Cras tempor sem at justo pharetra convallis. Curabitur vel sodales purus. Vestibulum interdum facilisis nulla imperdiet suscipit. Quisque lectus felis, condimentum eget hendrerit sit amet.</div>
+                </div>
+
+                <div class="ui-g">
+                    <div class="ui-g-6 ui-md-3"><p:graphicImage name="demo/images/nature/nature1.jpg" style="width:100%"/></div>  
+                    <div class="ui-g-6 ui-md-3"><p:graphicImage name="demo/images/nature/nature2.jpg" style="width:100%"/></div> 
+                    <div class="ui-g-6 ui-md-3"><p:graphicImage name="demo/images/nature/nature3.jpg" style="width:100%"/></div>    
+                    <div class="ui-g-6 ui-md-3"><p:graphicImage name="demo/images/nature/nature4.jpg" style="width:100%"/></div>      
+                </div>
+
+                <div class="ui-g">
+                    <div class="ui-g-12 ui-md-6">Phasellus faucibus purus volutpat mauris lacinia sodales. Ut sit amet sapien facilisis, commodo dui non, fringilla tellus. Quisque tempus facilisis nisi sodales finibus. Pellentesque neque orci, ullamcorper vitae ligula quis, dignissim euismod augue.</div>
+                    <div class="ui-g-12 ui-md-6">Fusce ullamcorper congue massa, eget ullamcorper nunc lobortis egestas. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque ultrices dui eget dolor feugiat dapibus. Aliquam pretium leo et egestas luctus. Nunc facilisis gravida tellus.</div>
+                </div>
+            </div>
+        </div>
+        <div class="ui-g-12">
+            Footer
+        </div>
+    </div>    
+
+
+
+
+</ui:composition>

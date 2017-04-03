@@ -104,7 +104,7 @@ public class SpringBootFacesApplication extends SpringBootServletInitializer {
         return new ServletContextInitializer() {
             @Override
             public void onStartup(ServletContext sc) throws ServletException {
-                sc.setInitParameter(Constants.ContextParams.THEME, "delta");
+                sc.setInitParameter(Constants.ContextParams.THEME, "bootstrap");
                 sc.setInitParameter(Constants.ContextParams.FONT_AWESOME, "true");
                 sc.setInitParameter(ProjectStage.PROJECT_STAGE_PARAM_NAME, ProjectStage.Development.name());
             }

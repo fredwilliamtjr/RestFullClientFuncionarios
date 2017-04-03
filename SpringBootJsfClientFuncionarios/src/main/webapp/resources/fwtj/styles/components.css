@@ -1,0 +1,111 @@
+/* TOGGLE */
+.aw-toggle {
+    float: right;
+    line-height: 50px;
+    margin-right: 15px;
+
+    color: #fff;
+}
+
+/* MENU */
+.aw-menu {
+    font-size: 1.1em;
+}
+
+.aw-menu > ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.aw-menu > ul a {
+    display: block;
+    padding: 10px 15px;
+
+    text-decoration: none;
+    font-weight: 500;
+    color: #373737;
+} 
+
+.aw-menu > ul i {
+    margin-right: 6px;
+}
+
+.aw-menu > ul a:hover, .aw-menu > ul a:focus {
+    background-color: #dfdfdf;
+}
+
+.aw-menu > ul .is-selected {
+    border-left: 3px solid #1e94d2;
+    background-color: #f3f3f3;
+}
+
+.aw-menu > ul .is-selected a {
+    margin-left: -3px;
+    color: #1e94d2;
+}
+
+/* PAGE-TITLE */
+.aw-page-title {
+    margin: 0;
+    padding: 20px 0;
+
+    font-size: 1.5em;
+    color: #373737;
+}
+
+
+/*AJUSTE DE TAMANHO DO CAMPO DATA*/
+.calendario input {
+    width: 100%;
+}
+
+/*AJUSTE DE TAMANHO DO CAMPO texto*/
+.campos {
+    width: 100%;
+}
+
+/*.myCustomStyle {
+      border-width:1px !important;
+      border-color: #000000 !important;
+      border-style: solid !important;
+      text-align: center !important;
+      font-weight: bold !important;
+      background: #FF8000 !important;
+      color: #FFFFFF !important;
+      width: 100% !important;
+}*/
+
+.botao{
+    width: 100% !important;
+    font-weight: bold !important;
+    /*border-color: #000000 !important;*/
+}
+
+.botaoverde{
+    background: #33cc00 !important;
+    color: #ffffff !important;
+}
+
+.botaoazul{
+    background: #1e94d2 !important;
+    color: #ffffff !important;
+}
+
+.botaoamarelo{
+    background: #d7dc34 !important;
+    color: #ffffff !important;
+}
+
+.botaovermelho{
+    background: #f54d3d !important;
+    color: #ffffff !important;
+}
+
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default { 
+    border: 1px solid #1e94d2; 
+}
+
+.ui-widget-content {
+    border: 1px solid #1e94d2;
+}
