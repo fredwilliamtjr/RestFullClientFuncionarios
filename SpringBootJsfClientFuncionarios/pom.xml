@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.4.2.RELEASE</version>
+        <version>1.3.5.RELEASE</version>
         <relativePath />
     </parent>
 
@@ -48,9 +48,9 @@
         </dependency>
         
         <dependency>
-            <groupId>org.primefaces.themes</groupId>
+            <groupId>org.primefaces.extensions</groupId>
             <artifactId>all-themes</artifactId>
-            <version>1.0.10</version>
+            <version>1.0.8</version>
         </dependency>
 
         <dependency>
@@ -70,15 +70,6 @@
         </dependency>
     </dependencies>
     
-    <repositories>
-        <repository>  
-            <id>prime-repo</id>  
-            <name>PrimeFaces Maven Repository</name>  
-            <url>http://repository.primefaces.org</url>  
-            <layout>default</layout>  
-        </repository> 
-    </repositories>
-
     <build>
         <finalName>ROOT</finalName>
         <plugins>
@@ -86,8 +77,6 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <!-- Eclipse: If Eclipse configured to refresh the workspace automatically, 
-                    "mvn spring-boot:run" can fail in some rare cases. -->
                     <addResources>false</addResources>
                 </configuration>
             </plugin>

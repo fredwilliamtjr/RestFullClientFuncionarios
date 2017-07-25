@@ -26,9 +26,7 @@ public class FuncionariosClientService implements Serializable {
     private static RestTemplate restTemplate = new RestTemplate();
 
     public List<Funcionario> lista(String tipoAutenticacao, String usuario, String separador, String senha, String url) {
-        RequestEntity<Void> requestEntity = RequestEntity
-                .get(URI.create(url + "/funcionarios"))
-                .header("Authorization", tipoAutenticacao + ConverterBase64.encodarBase64(usuario + separador + senha)).build();
+        RequestEntity<Void> requestEntity = RequestEntity.get(URI.create(url + "/funcionarios")).header("Authorization", tipoAutenticacao + ConverterBase64.encodarBase64(usuario + separador + senha)).build();
         ResponseEntity<Funcionario[]> responseEntity = null;
         try {
             responseEntity = restTemplate.exchange(requestEntity, Funcionario[].class);

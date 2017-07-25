@@ -28,12 +28,15 @@ import com.sun.faces.config.FacesInitializer;
 
 import br.com.fwtj.client.util.jsf.FacesViewScope;
 import javax.faces.webapp.FacesServlet;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.embedded.ServletRegistrationBean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
 
-//@Configuration
-//@ComponentScan
-//@EnableAutoConfiguration
+@Configuration
+@ComponentScan
+@EnableAutoConfiguration
 @SpringBootApplication // ***
 public class SpringBootFacesApplication extends SpringBootServletInitializer {
 

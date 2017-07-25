@@ -39,13 +39,7 @@ public class FuncionariosRecurso {
     @Autowired
     FuncionarioServico funcionarioServico;
 
-    @RequestMapping(method = RequestMethod.GET,
-            produces
-            = {
-                MediaType.APPLICATION_JSON_VALUE,
-                MediaType.APPLICATION_XML_VALUE,
-                "application/x-yaml"
-            })
+    @RequestMapping(method = RequestMethod.GET,produces={MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE,"application/x-yaml"})
     public ResponseEntity<List<Funcionario>> listar() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         System.out.println("Usuario Logado : " + auth.getName());
