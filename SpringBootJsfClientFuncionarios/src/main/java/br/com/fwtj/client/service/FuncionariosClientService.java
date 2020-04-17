@@ -26,14 +26,14 @@ public class FuncionariosClientService implements Serializable {
     private static RestTemplate restTemplate = new RestTemplate();
 
     public List<Funcionario> lista(String tipoAutenticacao, String usuario, String separador, String senha, String url) {
-        RequestEntity<Void> requestEntity = RequestEntity.get(URI.create(url + "/funcionarios")).header("Authorization", tipoAutenticacao + ConverterBase64.encodarBase64(usuario + separador + senha)).build();
+        RequestEntity<Void> requestEntity = RequestEntity
+                .get(URI.create(url + "/funcionarios"))
+                .header("Authorization", tipoAutenticacao + ConverterBase64.encodarBase64(usuario + separador + senha))
+                .build();
         ResponseEntity<Funcionario[]> responseEntity = null;
         try {
             responseEntity = restTemplate.exchange(requestEntity, Funcionario[].class);
-        } catch (RestClientException restClientException) {
-            List<Funcionario> lista2 = new ArrayList<>();
-            return lista2;
-        } catch (IllegalArgumentException illegalArgumentException) {
+        } catch (RestClientException | IllegalArgumentException restClientException) {
             List<Funcionario> lista2 = new ArrayList<>();
             return lista2;
         }
@@ -43,7 +43,8 @@ public class FuncionariosClientService implements Serializable {
     public Funcionario salvar(String tipoAutenticacao, String usuario, String separador, String senha, String url, Funcionario funcionario) {
         RequestEntity<Funcionario> requestEntity = RequestEntity
                 .post(URI.create(url + "/funcionarios"))
-                .header("Authorization", tipoAutenticacao + ConverterBase64.encodarBase64(usuario + separador + senha)).body(funcionario);
+                .header("Authorization", tipoAutenticacao + ConverterBase64.encodarBase64(usuario + separador + senha))
+                .body(funcionario);
         ResponseEntity<Funcionario> responseEntity = restTemplate.exchange(requestEntity, Funcionario.class);
         funcionario = responseEntity.getBody();
         funcionario.setUri(responseEntity.getHeaders().getLocation().toString());
